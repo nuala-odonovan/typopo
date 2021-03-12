@@ -1,9 +1,17 @@
 body {
   font-family: sans-serif;
+  background-color: black;
+  color: lightgreen;
+  font-family: computer;
 }
 
 a {
   text-decoration: none;
+}
+
+@font-face {
+  font-family: 'computer';
+  src: url('/computer.ttf');
 }
 
 label {
@@ -18,4 +26,89 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.current-word {
+  font-weight: bolder;
+}
+
+.home-view {
+  display: flex;
+  justify-content: center;
+}
+
+.game-view {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.welcome-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input {
+  background-color: black;
+  color: lightgreen;
+  font-family: 'computer';
+}
+
+.welcome-view h2 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
+}
+
+.sidenav {
+  height: 100%;
+  width: 25%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #232323;
+  transition: 0.5s ease;
+  overflow-x: hidden;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: x-large;
+}
+
+.preview {
+  height: 300px;
+  overflow: hidden;
 }
