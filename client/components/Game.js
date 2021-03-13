@@ -4,21 +4,24 @@ const text = require('../../text')
 import Preview from './Preview'
 import Score from './Score'
 
+const defaultState = {
+  textToType: text,
+  words: [],
+  submission: '',
+  correctCount: 0,
+  idx: 0,
+  started: false,
+  startTime: null,
+  wpm: null,
+  sec: 0
+}
+
 class Game extends React.Component {
   constructor() {
     super()
-    this.state = {
-      textToType: text,
-      words: [],
-      submission: '',
-      correctCount: 0,
-      idx: 0,
-      started: false,
-      startTime: null,
-      wpm: null,
-      sec: 0
-    }
+    this.state = defaultState
     this.handleChange = this.handleChange.bind(this)
+    this.restart = this.restart.bind(this)
   }
 
   componentDidMount() {
@@ -30,7 +33,6 @@ class Game extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.sec !== this.state.sec) {
-      console.log('incomponentdidupdate', prevProps.sec, this.state.sec)
       if (this.state.sec > 60) {
         clearInterval(this.interval)
       }
@@ -41,16 +43,15 @@ class Game extends React.Component {
     return Math.floor(chars / 5 / (ms / 6000))
   }
 
-  checkFinished() {
-    console.log('in check finished')
-    if (this.state.idx + 1 === this.state.words.length) {
-      if (this.state.startTime) {
-        const ms = new Date().getTime() - this.state.startTime.getTime()
-        const wpm = this.wordsPerMinute(this.state.textToType.length, ms)
-        this.setState({wpm})
-      }
-    }
-  }
+  // checkFinished() {
+  //   if (this.state.idx + 1 === this.state.words.length) {
+  //     if (this.state.startTime) {
+  //       const ms = new Date().getTime() - this.state.startTime.getTime()
+  //       const wpm = this.wordsPerMinute(this.state.textToType.length, ms)
+  //       this.setState({wpm})
+  //     }
+  //   }
+  // }
 
   startTimer() {
     if (!this.state.started) {
@@ -81,14 +82,18 @@ class Game extends React.Component {
     })
   }
 
+  restart() {
+    this.setState(defaultState)
+  }
+
   render() {
     const handleChange = this.handleChange
     const idx = this.state.idx
     return (
       <div className="home-view">
         <NavBar user={this.props.user} />
-        {this.state.sec >= 60 ? (
-          <Score correct={this.state.correctCount} />
+        {this.state.sec >= 30 ? (
+          <Score correct={this.state.correctCount} restart={this.restart} />
         ) : (
           <div className="game-view">
             <div className="timer">{this.state.sec}</div>
@@ -97,13 +102,15 @@ class Game extends React.Component {
               text={this.state.textToType}
               submission={this.state.submission}
             />
-
-            <input
-              type="text"
-              name="submission"
-              value={this.state.submission}
-              onChange={handleChange}
-            />
+            <form autoComplete="off">
+              <input
+                type="text"
+                name="submission"
+                autoComplete="off"
+                value={this.state.submission}
+                onChange={handleChange}
+              />
+            </form>
           </div>
         )}
       </div>

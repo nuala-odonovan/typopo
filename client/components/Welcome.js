@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getUser} from '../store'
+import {getUser, getScores} from '../store'
 
 class Welcome extends React.Component {
   constructor(props) {
@@ -9,11 +9,12 @@ class Welcome extends React.Component {
   }
 
   handleEnter(e) {
-    const {setUser} = this.props
+    const {setUser, getTopScores} = this.props
     if (e.keyCode === 13) {
       console.log('yep')
       console.log(e.target.value)
       setUser(e.target.value)
+      getTopScores()
     }
   }
   render() {
@@ -34,7 +35,8 @@ const mapState = state => {
 
 const mapdispatch = dispatch => {
   return {
-    setUser: username => dispatch(getUser(username))
+    setUser: username => dispatch(getUser(username)),
+    getTopScores: () => dispatch(getScores())
   }
 }
 

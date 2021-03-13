@@ -8,6 +8,35 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  const scores = [
+    {
+      score: 10,
+      name: 'nunu'
+    },
+    {
+      score: 15,
+      name: 'ana'
+    },
+    {
+      score: 20,
+      name: 'hello'
+    },
+    {
+      score: 20,
+      name: 'bumbum'
+    },
+    {
+      score: 5,
+      name: 'doggy'
+    },
+    {
+      score: 10,
+      name: 'kitty'
+    }
+  ]
+
+  await Score.bulkCreate(scores)
+
   console.log(`seeded successfully`)
 }
 

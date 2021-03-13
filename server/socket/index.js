@@ -1,18 +1,15 @@
-let users = []
+const Score = require('../db')
 
 module.exports = io => {
   io.on('connection', socket => {
-    console.log(`A socket connection to the server has been made: ${socket.id}`)
-    socket.on('join server', username => {
-      const user = {
-        username,
-        id: socket.id
-      }
-      users.push(user)
-      io.emit('new user', user)
+    console.log(socket.id, ' has made a persistent connection to the server!')
+
+    socket.on('new-score', () => {
+      socket.broadcast.emit('new-score')
     })
-    socket.on('disconnect', () => {
-      console.log(`Connection ${socket.id} has left the building`)
+
+    socket.on('new-message', message => {
+      socket.broadcast.emit('new-message', message)
     })
   })
 }

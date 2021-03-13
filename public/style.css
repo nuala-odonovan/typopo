@@ -14,6 +14,11 @@ a {
   src: url('/computer.ttf');
 }
 
+@font-face {
+  font-family: 'gaming';
+  src: url('/retro.ttf');
+}
+
 label {
   display: block;
 }
@@ -52,7 +57,7 @@ form div {
 input {
   background-color: black;
   color: lightgreen;
-  font-family: 'computer';
+  font-family: 'gaming';
 }
 
 .welcome-view h2 {
@@ -111,4 +116,20 @@ input {
 .preview {
   height: 300px;
   overflow: hidden;
+  font-family: 'gaming';
+}
+
+.top-scores {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
+
+.top-scores p {
+  align-self: center;
+}
+
+.top-scores div {
+  display: flex;
+  justify-content: space-between;
 }

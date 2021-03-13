@@ -1,10 +1,10 @@
 const router = require('express').Router()
-const {Scores} = require('../db/models')
+const {Score} = require('../db/models')
 module.exports = router
 
 router.get('/top', async (req, res, next) => {
   try {
-    const top5 = await Scores.findAll({
+    const top5 = await Score.findAll({
       order: [['score', 'DESC']],
       limit: 5
     })
@@ -16,9 +16,9 @@ router.get('/top', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    await Scores.create({
+    await Score.create({
       score: req.body.score,
-      user: req.body.username
+      name: req.body.name
     })
     res.sendStatus(200)
   } catch (err) {
