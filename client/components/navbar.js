@@ -1,26 +1,39 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import socket from '../socket'
 
-const NavBar = props => {
-  const {user, scores} = props
+class NavBar extends React.Component {
+  componentDidMount() {
+    const {user} = this.props
+    console.log('in cpdm')
+    socket.emit('new-user', user)
+  }
 
-  return (
-    <div className="sidenav">
-      <h4>Welcome, {user.username}</h4>
-      <Link to="/chat">Chat</Link>
-      <Link to="/">Play</Link>
-      <div className="top-scores">
-        <p>Top Scores</p>
-        {scores.map(score => (
-          <div key={score.id}>
-            <p>{score.name}</p>
-            <p>{score.score}</p>
-          </div>
-        ))}
+  render() {
+    const {user, scores} = this.props
+
+    return (
+      <div className="sidenav">
+        <h4>Welcome, {user.username}</h4>
+        <Link className="chat-link" to="/chat">
+          Chat
+        </Link>
+        <Link className="play-link" to="/">
+          Play
+        </Link>
+        <div className="top-scores">
+          <p>Top Scores</p>
+          {scores.map(score => (
+            <div key={score.id}>
+              <p>{score.name}</p>
+              <p>{score.score}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const mapState = state => {

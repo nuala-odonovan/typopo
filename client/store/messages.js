@@ -3,7 +3,8 @@ import socket from '../socket'
 const ADD_MESSAGE = 'ADD_MESSAGE'
 const GOT_MESSAGE = 'GOT_MESSAGE'
 
-export const _addMessage = message => {
+export const addMessage = message => {
+  socket.emit('new-message', message)
   return {
     type: ADD_MESSAGE,
     message
@@ -11,21 +12,9 @@ export const _addMessage = message => {
 }
 
 export const gotMessage = message => {
-  console.log('IN GOT MESSAGE')
   return {
     type: GOT_MESSAGE,
     message
-  }
-}
-
-export const addMessage = message => {
-  return async dispatch => {
-    try {
-      dispatch(_addMessage(message))
-      socket.emit('new-message', message)
-    } catch (err) {
-      console.error(err)
-    }
   }
 }
 

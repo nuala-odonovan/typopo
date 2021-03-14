@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getUser, getScores} from '../store'
+import {updateUser, getScores, addUserOnline} from '../store'
 
 class Welcome extends React.Component {
   constructor(props) {
@@ -35,9 +35,10 @@ const mapState = state => {
 
 const mapdispatch = dispatch => {
   return {
-    setUser: username => dispatch(getUser(username)),
-    getTopScores: () => dispatch(getScores())
+    setUser: username => dispatch(updateUser(username)),
+    getTopScores: () => dispatch(getScores()),
+    addUser: user => dispatch(addUserOnline(user))
   }
 }
 
-export default connect(null, mapdispatch)(Welcome)
+export default connect(mapState, mapdispatch)(Welcome)

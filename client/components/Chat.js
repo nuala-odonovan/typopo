@@ -1,13 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addMessage} from '../store'
+import {addMessage, addUserOnline} from '../store'
 
 class Chat extends React.Component {
   constructor() {
     super()
+    this.state = {
+      input: ''
+    }
     this.submit = this.submit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
+  handleChange(e) {
+    const input = e.target.value
+    this.setState({input})
+  }
   submit(e) {
     const content = e.target.value
     const name = this.props.name
@@ -15,6 +23,7 @@ class Chat extends React.Component {
     if (e.key === 'Enter') {
       const message = {name, content}
       send(message)
+      this.setState({input: ''})
     }
   }
 
@@ -30,7 +39,11 @@ class Chat extends React.Component {
             </div>
           ))}
         </div>
-        <input onKeyDown={this.submit} />
+        <input
+          value={this.state.input}
+          onChange={this.handleChange}
+          onKeyDown={this.submit}
+        />
       </div>
     )
   }
@@ -38,6 +51,7 @@ class Chat extends React.Component {
 
 const mapState = state => {
   return {
+    user: state.user,
     name: state.user.username,
     messages: state.messages
   }
@@ -45,7 +59,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    send: message => dispatch(addMessage(message))
+    send: message => dispatch(addMessage(message)),
+    addUser: user => dispatch(addUserOnline(user))
   }
 }
 //message: {name: , content: }

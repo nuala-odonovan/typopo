@@ -1,11 +1,11 @@
-import React, {useCallback} from 'react'
-import NavBar from './NavBar'
-const text = require('../../text')
+import React from 'react'
+import {getText} from '../store/text'
+import {connect} from 'react-redux'
 import Preview from './Preview'
 import Score from './Score'
 
 const defaultState = {
-  textToType: text,
+  textToType: '',
   words: [],
   submission: '',
   correctCount: 0,
@@ -13,7 +13,12 @@ const defaultState = {
   started: false,
   startTime: null,
   wpm: null,
-  sec: 0
+  sec: 0,
+  isLoading: true
+}
+
+const random = () => {
+  return Math.floor(Math.random() * 10) + 1
 }
 
 class Game extends React.Component {
@@ -37,21 +42,23 @@ class Game extends React.Component {
     return Math.floor(chars / 5 / (ms / 6000))
   }
 
-  start() {
+  async start() {
+    const {fetchText} = this.props
+    await fetchText(random())
+    const {text} = this.props
     this.setState({
+      textToType: text,
       started: true
     })
     this.startTimer()
   }
 
   startTimer() {
-    if (!this.state.started) {
-      this.interval = setInterval(() => {
-        this.setState(prevProps => {
-          return {sec: prevProps.sec + 1}
-        })
-      }, 1000)
-    }
+    this.interval = setInterval(() => {
+      this.setState(prevProps => {
+        return {sec: prevProps.sec + 1}
+      })
+    }, 1000)
   }
 
   correctCount(input) {
@@ -79,8 +86,6 @@ class Game extends React.Component {
 
   render() {
     const handleChange = this.handleChange
-    const idx = this.state.idx
-    console.log('in render', this.state.started)
     if (!this.state.started) {
       return (
         <div className="start-view">
@@ -119,4 +124,16 @@ class Game extends React.Component {
   }
 }
 
-export default Game
+const mapState = state => {
+  return {
+    text: state.text
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    fetchText: id => dispatch(getText(id))
+  }
+}
+
+export default connect(mapState, mapDispatch)(Game)

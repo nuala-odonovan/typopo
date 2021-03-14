@@ -3,6 +3,8 @@
 const db = require('../server/db')
 const {User} = require('../server/db/models')
 const {Score} = require('../server/db/models')
+const {Text} = require('../server/db/models')
+const text = require('../text')
 
 async function seed() {
   await db.sync({force: true})
@@ -36,6 +38,8 @@ async function seed() {
   ]
 
   await Score.bulkCreate(scores)
+
+  await Text.bulkCreate(text)
 
   console.log(`seeded successfully`)
 }

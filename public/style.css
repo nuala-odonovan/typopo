@@ -157,3 +157,11 @@ input {
   display: flex;
   justify-content: space-between;
 }
+
+.chat-link {
+  color: purple;
+}
+
+.play-link {
+  color: blue;
+}
