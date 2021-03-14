@@ -104,6 +104,7 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 .timer {
@@ -123,6 +124,7 @@ input {
   display: flex;
   flex-direction: column;
   width: 75%;
+  margin-bottom: 2em;
 }
 
 .top-scores p {

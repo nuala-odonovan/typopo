@@ -91,7 +91,6 @@ class Game extends React.Component {
     const idx = this.state.idx
     return (
       <div className="home-view">
-        <NavBar user={this.props.user} />
         {this.state.sec >= 30 ? (
           <Score correct={this.state.correctCount} restart={this.restart} />
         ) : (

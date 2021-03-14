@@ -1,11 +1,10 @@
 import React from 'react'
-import Home from './components/Home'
-import Welcome from './components/Welcome'
+import Main from './components/Main'
 
 const App = () => {
   return (
     <div>
-      <Home />
+      <Main />
     </div>
   )
 }
