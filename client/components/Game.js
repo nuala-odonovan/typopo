@@ -22,13 +22,7 @@ class Game extends React.Component {
     this.state = defaultState
     this.handleChange = this.handleChange.bind(this)
     this.restart = this.restart.bind(this)
-  }
-
-  componentDidMount() {
-    this.setState({
-      started: true
-    })
-    this.startTimer()
+    this.start = this.start.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -43,15 +37,12 @@ class Game extends React.Component {
     return Math.floor(chars / 5 / (ms / 6000))
   }
 
-  // checkFinished() {
-  //   if (this.state.idx + 1 === this.state.words.length) {
-  //     if (this.state.startTime) {
-  //       const ms = new Date().getTime() - this.state.startTime.getTime()
-  //       const wpm = this.wordsPerMinute(this.state.textToType.length, ms)
-  //       this.setState({wpm})
-  //     }
-  //   }
-  // }
+  start() {
+    this.setState({
+      started: true
+    })
+    this.startTimer()
+  }
 
   startTimer() {
     if (!this.state.started) {
@@ -89,31 +80,42 @@ class Game extends React.Component {
   render() {
     const handleChange = this.handleChange
     const idx = this.state.idx
-    return (
-      <div className="home-view">
-        {this.state.sec >= 30 ? (
-          <Score correct={this.state.correctCount} restart={this.restart} />
-        ) : (
-          <div className="game-view">
-            <div className="timer">{this.state.sec}</div>
+    console.log('in render', this.state.started)
+    if (!this.state.started) {
+      return (
+        <div className="start-view">
+          <button type="button" onClick={this.start}>
+            Start
+          </button>
+        </div>
+      )
+    } else {
+      return (
+        <div className="home-view">
+          {this.state.sec >= 30 ? (
+            <Score correct={this.state.correctCount} restart={this.restart} />
+          ) : (
+            <div className="game-view">
+              <div className="timer">{this.state.sec}</div>
 
-            <Preview
-              text={this.state.textToType}
-              submission={this.state.submission}
-            />
-            <form autoComplete="off">
-              <input
-                type="text"
-                name="submission"
-                autoComplete="off"
-                value={this.state.submission}
-                onChange={handleChange}
+              <Preview
+                text={this.state.textToType}
+                submission={this.state.submission}
               />
-            </form>
-          </div>
-        )}
-      </div>
-    )
+              <form autoComplete="off">
+                <input
+                  type="text"
+                  name="submission"
+                  autoComplete="off"
+                  value={this.state.submission}
+                  onChange={handleChange}
+                />
+              </form>
+            </div>
+          )}
+        </div>
+      )
+    }
   }
 }
 

@@ -19,6 +19,7 @@ class Score extends React.Component {
 
   render() {
     const correct = this.props.correct
+    const restart = this.props.restart
     const wpm = Math.floor(correct / 5)
     const lowestScore = this.props.scores[this.props.scores.length - 1].score
     const highestScore = this.props.scores[0].score
@@ -28,6 +29,9 @@ class Score extends React.Component {
         <h4>{wpm} wpm</h4>
         {wpm > lowestScore && wpm < highestScore ? <h3>New Top Five!</h3> : ''}
         {wpm >= highestScore ? <h3>New Top Score!!</h3> : ''}
+        <button type="button" onClick={restart}>
+          Try Again
+        </button>
       </div>
     )
   }

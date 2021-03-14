@@ -1,5 +1,6 @@
 import React from 'react'
 import Game from './Game'
+import Chat from './Chat'
 
 import {Route, Switch} from 'react-router-dom'
 
@@ -8,7 +9,7 @@ class Routes extends React.Component {
     return (
       <Switch>
         <Route exact path="/" component={Game} />
-        {/* <Route exact path="/chat" component={Chat} /> */}
+        <Route exact path="/chat" component={Chat} />
       </Switch>
     )
   }
