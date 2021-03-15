@@ -23,7 +23,7 @@ class NavBar extends React.Component {
           Play
         </Link>
         <div className="top-scores">
-          <p>Top Scores</p>
+          <p>Leaderboard</p>
           {scores.map(score => (
             <div key={score.id}>
               <p>{score.name}</p>

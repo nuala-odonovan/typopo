@@ -3,6 +3,7 @@ body {
   background-color: black;
   color: lightgreen;
   font-family: computer;
+  height: 100%;
 }
 
 a {
@@ -44,17 +45,52 @@ form div {
 
 .chat-view {
   display: flex;
-  margin: 25%;
 }
 
 .chat-view input {
-  position: absolute;
+  position: fixed;
+  width: 53%;
   bottom: 0;
+  margin-left: 25%;
 }
 
-.start-view {
+.messages {
   display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+  margin-left: 25%;
+  margin-right: 20%;
+  width: 50%;
+  height: 90%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+  display: flex;
+  align-items: center;
+}
+
+.messages > div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow-wrap: break-word;
+  width: 100%;
+}
+
+.messages p {
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.start-view,
+.score-view {
+  margin-left: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  height: 500px;
 }
 
 .start-view button,
@@ -74,6 +110,8 @@ form div {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  margin-top: 4em;
 }
 
 input {
@@ -88,7 +126,7 @@ input {
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: 0.15em; /* Adjust as needed */
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
 /* The typing effect */
@@ -97,7 +135,7 @@ input {
     width: 0;
   }
   to {
-    width: 100%;
+    width: 38%;
   }
 }
 
@@ -129,6 +167,25 @@ input {
   justify-content: space-between;
 }
 
+.message-content {
+  font-family: 'gaming';
+}
+
+.online {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  top: 0;
+  background-color: #232323;
+  transition: 0.5s ease;
+  overflow-x: hidden;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  right: 0;
+}
+
 .timer {
   position: absolute;
   top: 0;
@@ -138,7 +195,7 @@ input {
 
 .preview {
   height: 300px;
-  overflow: hidden;
+  overflow: auto;
   font-family: 'gaming';
 }
 

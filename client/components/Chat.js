@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import Online from './Online'
 import {addMessage, addUserOnline} from '../store'
 
 class Chat extends React.Component {
@@ -16,6 +17,7 @@ class Chat extends React.Component {
     const input = e.target.value
     this.setState({input})
   }
+
   submit(e) {
     const content = e.target.value
     const name = this.props.name
@@ -35,7 +37,7 @@ class Chat extends React.Component {
           {messages.map((message, idx) => (
             <div key={idx}>
               <p>{message.name}</p>
-              <p>{message.content}</p>
+              <p className="message-content">{message.content}</p>
             </div>
           ))}
         </div>
@@ -44,6 +46,7 @@ class Chat extends React.Component {
           onChange={this.handleChange}
           onKeyDown={this.submit}
         />
+        <Online />
       </div>
     )
   }

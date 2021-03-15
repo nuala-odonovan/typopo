@@ -23,9 +23,9 @@ const defaultState = []
 export default function(state = defaultState, action) {
   switch (action.type) {
     case ADD_MESSAGE:
-      return [...state, action.message]
+      return [action.message, ...state]
     case GOT_MESSAGE:
-      return [...state, action.message]
+      return [action.message, ...state]
     default:
       return state
   }

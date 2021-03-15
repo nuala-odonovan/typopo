@@ -97,7 +97,7 @@ class Game extends React.Component {
     } else {
       return (
         <div className="home-view">
-          {this.state.sec >= 30 ? (
+          {this.state.sec >= 60 ? (
             <Score correct={this.state.correctCount} restart={this.restart} />
           ) : (
             <div className="game-view">
