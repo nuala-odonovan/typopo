@@ -99,12 +99,12 @@ class Game extends React.Component {
           <div>You have 60 seconds.</div>
           <div>Start typing and don't stop.</div>
           <div>
-            Correct characters will appear{' '}
-            <span style={{color: '#dfffa0'}}>yellow</span>.
+            Correct characters will appear
+            <span style={{color: '#dfffa0'}}> yellow</span>.
           </div>
           <div>
-            Incorrect characters will appear{' '}
-            <span style={{color: '#fcbea4'}}>red</span>.
+            Incorrect characters will appear
+            <span style={{color: '#fcbea4'}}> red</span>.
           </div>
           <button type="button" onClick={this.start}>
             Start
