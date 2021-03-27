@@ -28,6 +28,7 @@ class Game extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.restart = this.restart.bind(this)
     this.start = this.start.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -80,15 +81,31 @@ class Game extends React.Component {
     })
   }
 
+  handleSubmit(evt) {
+    if (evt.keyCode === 13) {
+      evt.preventDefault()
+    }
+  }
+
   restart() {
     this.setState(defaultState)
   }
 
   render() {
-    const handleChange = this.handleChange
+    const {handleChange, handleSubmit} = this
     if (!this.state.started) {
       return (
         <div className="start-view">
+          <div>You have 60 seconds.</div>
+          <div>Start typing and don't stop.</div>
+          <div>
+            Correct characters will appear{' '}
+            <span style={{color: '#dfffa0'}}>yellow</span>.
+          </div>
+          <div>
+            Incorrect characters will appear{' '}
+            <span style={{color: '#fcbea4'}}>red</span>.
+          </div>
           <button type="button" onClick={this.start}>
             Start
           </button>
@@ -114,6 +131,7 @@ class Game extends React.Component {
                   autoComplete="off"
                   value={this.state.submission}
                   onChange={handleChange}
+                  onKeyDown={handleSubmit}
                 />
               </form>
             </div>
