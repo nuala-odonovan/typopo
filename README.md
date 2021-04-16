@@ -8,6 +8,7 @@ We welcome you with open arms here at typopo:
 ![image](https://user-images.githubusercontent.com/75636743/115067307-b5712c80-9ebe-11eb-93bd-940ad92b0a0a.png)
 
 Try not to get too emotional as you type:
+
 ![image](https://user-images.githubusercontent.com/75636743/115067595-257fb280-9ebf-11eb-9a27-cc20d260f111.png)
 
 If anyone else is online, try to talk to them:
