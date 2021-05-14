@@ -458,7 +458,10 @@ function (_React$Component) {
           autoComplete: "off",
           value: this.state.submission,
           onChange: handleChange,
-          onKeyDown: handleSubmit
+          onKeyDown: handleSubmit,
+          onPaste: function onPaste(e) {
+            return e.preventDefault();
+          }
         }))));
       }
     }
@@ -45066,7 +45069,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

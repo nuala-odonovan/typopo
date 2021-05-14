@@ -132,6 +132,7 @@ class Game extends React.Component {
                   value={this.state.submission}
                   onChange={handleChange}
                   onKeyDown={handleSubmit}
+                  onPaste={e => e.preventDefault()}
                 />
               </form>
             </div>
