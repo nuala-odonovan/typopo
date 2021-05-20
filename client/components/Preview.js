@@ -2,8 +2,6 @@ import React from 'react'
 
 const Preview = props => {
   const text = props.text.split('')
-  console.log('submission =>', props.submission)
-  console.log('text =>', props.text)
 
   return (
     <div className="preview border rounded p-3 mb-4">
